@@ -13,8 +13,7 @@ class PointerThisPlease<T> {
   PointerThisPlease(this.value);
 }
 
-Widget? prepareWidget(dynamic object,
-    {dynamic parameter = const NotGiven(), BuildContext? context, Function? stringToWidgetFunction}) {
+Widget? prepareWidget(dynamic object, {dynamic parameter = const NotGiven(), BuildContext? context, Function? stringToWidgetFunction}) {
   if (object == null) {
     return (null);
   }
@@ -488,7 +487,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
       ));
     }
     Widget innerItemsWidget;
-    var list = <Widget?>[];
+    var list = <Widget>[];
     try {
       selectedItems.forEach((item) {
         if (widget.selectedValueWidgetFn != null) {
@@ -508,8 +507,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
         children: list as List<Widget>,
       );
     }
-    final EdgeInsetsGeometry padding =
-        ButtonTheme.of(context).alignedDropdown ? _kAlignedButtonPadding : _kUnalignedButtonPadding;
+    final EdgeInsetsGeometry padding = ButtonTheme.of(context).alignedDropdown ? _kAlignedButtonPadding : _kUnalignedButtonPadding;
 
     Widget clickable = InkWell(
         key: Key("clickableResultPlaceHolder"), //this key is used for running automated tests
@@ -610,8 +608,8 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
                     child: prepareWidget(widget.underline, parameter: selectedResult) ??
                         Container(
                           height: 1.0,
-                          decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(color: valid ? Color(0xFFBDBDBD) : Colors.red, width: 0.0))),
+                          decoration:
+                              BoxDecoration(border: Border(bottom: BorderSide(color: valid ? Color(0xFFBDBDBD) : Colors.red, width: 0.0))),
                         ),
                   ),
           ],
@@ -915,9 +913,7 @@ class _DropdownDialogState<T> extends State<DropdownDialog> {
                   ? widget.displayItem == null
                       ? (Row(children: [
                           Icon(
-                            widget.selectedItems!.contains(shownIndexes![index])
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
+                            widget.selectedItems!.contains(shownIndexes![index]) ? Icons.check_box : Icons.check_box_outline_blank,
                           ),
                           SizedBox(
                             width: 7,
