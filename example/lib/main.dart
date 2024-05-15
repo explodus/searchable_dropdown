@@ -26,7 +26,7 @@ class ExampleNumber {
   };
 
   String get numberString {
-    return (map.containsKey(number) ? map[number] : "unknown");
+    return (map.containsKey(number) ? map[number] ?? "unknown" : "unknown");
   }
 
   ExampleNumber(this.number);
@@ -51,8 +51,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool asTabs = false;
-  String selectedValue;
-  String preselectedValue = "dolor sit";
+  String selectedValue = '';
+  String preselectedValue = 'dolor sit';
   ExampleNumber selectedNumber;
   List<int> selectedItems = [];
   final List<DropdownMenuItem> items = [];
@@ -64,12 +64,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     String wordPair = "";
-    loremIpsum
-        .toLowerCase()
-        .replaceAll(",", "")
-        .replaceAll(".", "")
-        .split(" ")
-        .forEach((word) {
+    loremIpsum.toLowerCase().replaceAll(",", "").replaceAll(".", "").split(" ").forEach((word) {
       if (wordPair.isEmpty) {
         wordPair = word + " ";
       } else {
@@ -232,11 +227,7 @@ class _MyAppState extends State<MyApp> {
             keyword.split(" ").forEach((k) {
               int i = 0;
               items.forEach((item) {
-                if (k.isNotEmpty &&
-                    (item.value
-                        .toString()
-                        .toLowerCase()
-                        .contains(k.toLowerCase()))) {
+                if (k.isNotEmpty && (item.value.toString().toLowerCase().contains(k.toLowerCase()))) {
                   ret.add(i);
                 }
                 i++;
@@ -253,9 +244,7 @@ class _MyAppState extends State<MyApp> {
         label: "Label for multi",
         underline: Container(
           height: 1.0,
-          decoration: BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: Colors.teal, width: 3.0))),
+          decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.teal, width: 3.0))),
         ),
         iconDisabledColor: Colors.brown,
         iconEnabledColor: Colors.indigo,
@@ -341,8 +330,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     setState(() {
                       selectedItems.clear();
-                      selectedItems.addAll(
-                          Iterable<int>.generate(items.length).toList());
+                      selectedItems.addAll(Iterable<int>.generate(items.length).toList());
                     });
                   },
                   child: Text("Select all")),
@@ -379,8 +367,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     setState(() {
                       selectedItems.clear();
-                      selectedItems.addAll(
-                          Iterable<int>.generate(items.length).toList());
+                      selectedItems.addAll(Iterable<int>.generate(items.length).toList());
                     });
                   },
                   child: Text("Select all")),
@@ -417,8 +404,7 @@ class _MyAppState extends State<MyApp> {
       ),
       "Single dialog object": SearchableDropdown.single(
         items: ExampleNumber.list.map((exNum) {
-          return (DropdownMenuItem(
-              child: Text(exNum.numberString), value: exNum));
+          return (DropdownMenuItem(child: Text(exNum.numberString), value: exNum));
         }).toList(),
         value: selectedNumber,
         hint: "Select one number",
@@ -540,9 +526,7 @@ class _MyAppState extends State<MyApp> {
                   actions: appBarActions,
                   bottom: TabBar(
                     isScrollable: true,
-                    tabs: Iterable<int>.generate(widgets.length)
-                        .toList()
-                        .map((i) {
+                    tabs: Iterable<int>.generate(widgets.length).toList().map((i) {
                       return (Tab(
                         text: (i + 1).toString(),
                       ));

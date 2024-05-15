@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 const EdgeInsetsGeometry _kAlignedButtonPadding = EdgeInsetsDirectional.only(start: 16.0, end: 4.0);
 const EdgeInsets _kUnalignedButtonPadding = EdgeInsets.zero;
@@ -359,8 +358,8 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
   TextStyle? get _textStyle =>
       widget.style ??
       (_enabled && !(widget.readOnly)
-          ? Theme.of(context).textTheme.subtitle1
-          : Theme.of(context).textTheme.subtitle1!.copyWith(color: _disabledIconColor));
+          ? Theme.of(context).textTheme.titleMedium
+          : Theme.of(context).textTheme.titleMedium!.copyWith(color: _disabledIconColor));
   bool get _enabled => widget.items.isNotEmpty && widget.onChanged != null;
 
   Color? get _enabledIconColor {
@@ -480,10 +479,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
       hintIndex = items.length;
       items.add(DefaultTextStyle(
         style: _textStyle!.copyWith(color: Theme.of(context).hintColor),
-        child: IgnorePointer(
-          child: emplacedHint,
-          ignoringSemantics: false,
-        ),
+        child: IgnorePointer(child: ExcludeSemantics(child: emplacedHint)),
       ));
     }
     Widget innerItemsWidget;
@@ -503,9 +499,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T?>> {
     if (list.isEmpty && hintIndex != null) {
       innerItemsWidget = items[hintIndex];
     } else {
-      innerItemsWidget = Column(
-        children: list as List<Widget>,
-      );
+      innerItemsWidget = Column(children: list);
     }
     final EdgeInsetsGeometry padding = ButtonTheme.of(context).alignedDropdown ? _kAlignedButtonPadding : _kUnalignedButtonPadding;
 
